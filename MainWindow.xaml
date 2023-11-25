@@ -1,0 +1,144 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WalletMentor"
+        xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:userControls="clr-namespace:WalletMentor.Views.UserControls" xmlns:Points="clr-namespace:LiveCharts.Wpf.Points;assembly=LiveCharts.Wpf" x:Class="WalletMentor.MainWindow"
+        d:DataContext="{d:DesignInstance Type={x:Type userControls:CustomInput}}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="680" Width="1350">
+    <Grid IsEnabled="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <userControls:MenuBar/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button x:Name="btnIncome" Background="Black" Grid.Row="0" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Income" Click="BtnIncomeClick"/>
+                <Button x:Name="btnExpense" Background="Black" Grid.Row="1" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Expense" Click="BtnExpanseClick"/>
+                <Button x:Name="btnBudget" Background="Black" Grid.Row="2" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Budget" Click="BtnBudgetClick"/>
+                <Button x:Name="btnStat" Background="Black" Grid.Row="3" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Overview" Click="BtnStatClick"/>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="welcomeBox" Height="Auto" Width="Auto" d:IsHidden="True">
+                <ListBox>
+                    <Image Source="/welcome.png" Stretch="Fill"/>
+                </ListBox>
+            </Grid>
+
+
+            <!-- Income Window -->
+            <Grid Grid.Column="1" x:Name="incomeGrid" d:IsHidden="True" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="incomeMonth" FontSize="60" Grid.Column="0" Margin="10,0,5,0" ItemsSource="{Binding MonthCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                        <ComboBox x:Name="incomeYear" FontSize="60" Grid.Column="1" Margin="5,0,10,0" ItemsSource="{Binding YearCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                    </Grid>
+                    <userControls:CustomInput x:Name="incomeAmount" Grid.Row="1" Placeholder="How much did you earn?" FontSize="30" Margin="10,0,10,0" Height="Auto" Width="Auto"/>
+                    <Button x:Name="btnAddIncome" Background="Black" Grid.Row="2" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Add Income " Margin="10,0,10,10" Click="BtnAddIncomeClick" />
+                </Grid>
+            </Grid>
+
+
+            <!-- Expanse Window -->
+            <Grid Grid.Column="1" x:Name="expenseGrid" d:IsHidden="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="expenseMonth" FontSize="60" Grid.Column="0" Margin="10,0,5,0" ItemsSource="{Binding MonthCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                        <ComboBox x:Name="expenseYear" FontSize="60" Grid.Column="1" Margin="5,0,10,0" ItemsSource="{Binding YearCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                    </Grid>
+                    <userControls:CustomInput x:Name="expenseAmount" Grid.Row="1" Placeholder="How much did you spend?" FontSize="30" Margin="10,0,10,0" Height="Auto" Width="Auto"/>
+                    <Button x:Name="btnAddExpense" Background="Black" Grid.Row="2" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Add Expenses" Margin="10,0,10,10" Click="BtnAddExpenseClick" />
+                </Grid>
+            </Grid>
+
+
+            <!-- Budget Window -->
+            <Grid Grid.Column="1" x:Name="budgetGrid" d:IsHidden="True"  >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="budgetMonth" FontSize="60" Grid.Column="0" Margin="10,0,5,0" ItemsSource="{Binding MonthCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                        <ComboBox x:Name="budgetYear" FontSize="60" Grid.Column="1" Margin="5,0,10,0" ItemsSource="{Binding YearCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                    </Grid>
+                    <userControls:CustomInput x:Name="budgetAmount" Grid.Row="1" Placeholder="Your budget for this month" FontSize="30" Margin="10,0,10,0" Height="Auto" Width="Auto"/>
+                    <Button x:Name="btnAddBudget" Background="Black" Grid.Row="2" Foreground="Red" FontSize="22" FontStyle="Italic" FontWeight="DemiBold" Content="Set Budget" Margin="10,0,10,10" Click="BtnAddBudgetClick"/>
+                </Grid>
+            </Grid>
+
+
+            <!-- Overview Window -->
+            <Grid Grid.Column="1" x:Name="overviewGrid" d:IsHidden="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="70*"/>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" x:Name="btnGenerateReport" Background="Black" Foreground="Red"  FontStyle="Italic" FontWeight="DemiBold" Content="Generate Report" Click="BtnGenerateReportClick"/>
+                    <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="overviewYearStart" FontSize="40" Grid.Column="0" Margin="10,0,5,0" ItemsSource="{Binding YearCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                    <ComboBox x:Name="overviewYearEnd" FontSize="40" Grid.Column="1" Margin="5,0,10,0" ItemsSource="{Binding YearCollection, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" SelectedIndex="0"/>
+                </Grid>
+                <Wpf:CartesianChart  
+                    Grid.Row="2" 
+                    Height="Auto" 
+                    Width="Auto" 
+                    Series="{Binding SeriesCollection}" 
+                    LegendLocation="Right">
+                    <Wpf:CartesianChart.AxisX>
+                        <Wpf:Axis Title="Year" Labels="{Binding Labels}"></Wpf:Axis>
+                    </Wpf:CartesianChart.AxisX>
+                    <Wpf:CartesianChart.AxisY>
+                        <Wpf:Axis Title="Amount"></Wpf:Axis>
+                    </Wpf:CartesianChart.AxisY>
+                </Wpf:CartesianChart>
+
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+</Window>

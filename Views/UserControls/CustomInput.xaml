@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="WalletMentor.Views.UserControls.CustomInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WalletMentor.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="640">
+    <Grid Background="White">
+        <TextBox x:Name="textInput" VerticalContentAlignment="Center" FontSize="40" FontWeight="Light" Background="Transparent" TextChanged="TextInput_OnTextChanged" Foreground="Red"/>
+        <TextBlock x:Name="tblPlaceHolder" Text="{Binding Placeholder, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FontSize="40" FontWeight="Light" Foreground="DarkGray" Margin="5,0,0,0" Panel.ZIndex="-1"/>
+        <Button x:Name="btnClear" Width="30" HorizontalAlignment="Right" Content="X" Background="Transparent" Foreground="LightGray" BorderThickness="0" Click="BtnClear_OnClick"/>
+    </Grid>
+
+</UserControl>
